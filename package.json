@@ -8,9 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@ai-sdk/groq": "latest",
     "@ai-sdk/react": "latest",
     "ai": "latest",
+    "groq-sdk": "latest",
     "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
