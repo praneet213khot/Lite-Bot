@@ -1,17 +1,27 @@
 import { createGroq } from '@ai-sdk/groq';
 import { streamText } from 'ai';
 
+export const maxDuration = 30;
+
 const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  try {
+    const { messages } = await req.json();
 
-  const result = streamText({
-    model: groq('llama-3.3-70b-versatile'),
-    messages,
-  });
+    const result = await streamText({
+      model: groq('llama-3.3-70b-versatile'),
+      messages,
+    });
 
-  return result.toDataStreamResponse();
+    return result.toDataStreamResponse();
+  } catch (error) {
+    console.error('Chat API Error:', error);
+    return new Response(JSON.stringify({ error: 'Failed to process chat request' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 }
