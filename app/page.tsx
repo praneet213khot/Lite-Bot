@@ -1,41 +1,47 @@
 'use client';
 
-import { useChat } from 'ai/react';
+import { useChat } from '@ai-sdk/react';
 import { Bot, Send } from 'lucide-react';
 
-export default function LiteBot() {
+export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
-    <div className="flex flex-col h-screen bg-slate-950 text-slate-100">
-      <header className="flex items-center gap-2 p-4 bg-slate-900 border-b border-slate-800">
-        <Bot className="w-6 h-6 text-cyan-400" />
+    <main className="flex flex-col h-screen max-w-lg mx-auto p-4 bg-slate-50">
+      <header className="flex items-center gap-2 pb-4 border-b">
+        <Bot className="w-6 h-6 text-blue-600" />
         <h1 className="font-bold text-lg">LiteBot</h1>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto py-4 space-y-4">
         {messages.map((m) => (
-          <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
-              m.role === 'user' ? 'bg-cyan-600 text-white' : 'bg-slate-900 border border-slate-800 text-slate-200'
-            }`}>
-              {m.content}
-            </div>
+          <div
+            key={m.id}
+            className={`p-3 rounded-lg max-w-[80%] ${
+              m.role === 'user'
+                ? 'ml-auto bg-blue-600 text-white'
+                : 'mr-auto bg-gray-200 text-gray-800'
+            }`}
+          >
+            {m.content}
           </div>
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="p-3 bg-slate-900 border-t border-slate-800 flex gap-2">
+      <form onSubmit={handleSubmit} className="flex gap-2 pt-2 border-t">
         <input
           value={input}
           onChange={handleInputChange}
-          placeholder="Ask LiteBot..."
-          className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-100 focus:outline-none"
+          placeholder="Type a message..."
+          className="flex-1 p-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-black"
         />
-        <button type="submit" className="bg-cyan-600 px-4 py-2 rounded-xl text-white">
-          <Send className="w-4 h-4" />
+        <button
+          type="submit"
+          className="p-2 bg-blue-600 text-white rounded-lg flex items-center justify-center"
+        >
+          <Send className="w-5 h-5" />
         </button>
       </form>
-    </div>
+    </main>
   );
 }
