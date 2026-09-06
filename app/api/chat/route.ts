@@ -9,8 +9,7 @@ const groq = createGroq({
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const messages = body.messages || [{ role: 'user', content: body.prompt || 'Hello' }];
+    const { messages } = await req.json();
 
     const result = await streamText({
       model: groq('llama-3.3-70b-versatile'),
@@ -19,8 +18,8 @@ export async function POST(req: Request) {
 
     return result.toDataStreamResponse();
   } catch (error: any) {
-    console.error('API Route Error:', error);
-    return new Response(JSON.stringify({ error: error.message || 'Failed to process request' }), {
+    console.error('API Error details:', error);
+    return new Response(JSON.stringify({ error: error.message || 'Internal Server Error' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
