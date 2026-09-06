@@ -14,7 +14,7 @@ export default function Home() {
       </header>
 
       <div className="flex-1 overflow-y-auto py-4 space-y-4">
-        {messages.map((m) => (
+        {messages.map((m: any) => (
           <div
             key={m.id}
             className={`p-3 rounded-lg max-w-[80%] ${
