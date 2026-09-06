@@ -1,9 +1,8 @@
-import { createOpenAI } from '@ai-sdk/openai';
+import { createGroq } from '@ai-sdk/groq';
 import { streamText } from 'ai';
 
-const groq = createOpenAI({
-  baseURL: 'https://api.groq.com/openai/v1',
-  apiKey: process.env.GROQ_API_KEY || '',
+const groq = createGroq({
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function POST(req: Request) {
