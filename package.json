@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ai-sdk/groq": "latest",
+    "@ai-sdk/react": "latest",
     "ai": "latest",
     "lucide-react": "latest",
     "next": "latest",
@@ -16,4 +17,3 @@
     "react-dom": "latest"
   }
 }
-
