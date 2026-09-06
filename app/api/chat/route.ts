@@ -18,8 +18,8 @@ export async function POST(req: Request) {
 
     return result.toDataStreamResponse();
   } catch (error: any) {
-    console.error('API Error details:', error);
-    return new Response(JSON.stringify({ error: error.message || 'Internal Server Error' }), {
+    console.error('API Error:', error);
+    return new Response(JSON.stringify({ error: error.message || 'Error processing chat' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
